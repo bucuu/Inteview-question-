@@ -1,0 +1,48 @@
+def read_input():
+    # Read two lines of input
+    first_line = input().strip()
+    second_line = input().strip()
+    
+    # Split the input lines into lists of strings
+    set1 = first_line.split()
+    set2 = second_line.split()
+    
+    return set1, set2
+
+def find_common_values(set1, set2):
+    # Create a dictionary to store unique elements from the first set for fast lookup
+    value_set = {}
+
+    # Add each element from the first set to the dictionary
+    for value in set1:
+        value_set[value] = True  # Use value as key for quick lookup
+
+    # Prepare a set to collect common values (to avoid duplicates)
+    common_values = set()
+
+    # Check for common values in the second set
+    for value in set2:
+        if value in value_set:  # Check existence in the dictionary
+            common_values.add(value)  # Add to common values if found
+
+    return common_values
+
+def main():
+    # Read input values
+    set1, set2 = read_input()
+    
+    # Find common values
+    common_values = find_common_values(set1, set2)
+    
+    # Sort the common values alphanumerically
+    # First by whether the element is a digit, then by the element itself
+    sorted_common_values = sorted(common_values, key=lambda x: (x.isalpha(), x))
+
+    # Output the result
+    if sorted_common_values:
+        print(" ".join(sorted_common_values))  # Join and print common values
+    else:
+        print("NULL")  # Print NULL if no common values exist
+
+if __name__ == "__main__":
+    main()
